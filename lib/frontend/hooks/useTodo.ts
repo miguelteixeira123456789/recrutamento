@@ -1,9 +1,15 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 export function useTodo(initialItems?: string[]) {
-  const todosRef = useRef<Array<string>>(initialItems || new Array());
+  const [todos, setTodos] = useState<string[]>(initialItems || []);
 
   /* Add your todo methods here */
+  const addItem = () => {
+    setTodos((prevTodos) => [...prevTodos, "New todo"]);
+  };
 
-  return [Array.from(todosRef.current)];
+  return {
+    todos,
+    addTodo: addItem,
+  };
 }
